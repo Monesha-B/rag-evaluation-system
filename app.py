@@ -27,7 +27,8 @@ with st.sidebar:
     st.header("Configuration")
     k = st.slider("Top-k documents", 1, 8, 3)
     mode = st.selectbox("Answer source", ["Offline extractive demo", "Existing responses in question CSV", "Gemini generation"])
-    api_key = st.text_input("Gemini API key (optional)", value=configured_api_key(), type="password", help="Your key is not saved to files or GitHub")
+    api_key = configured_api_key()
+    st.caption("Gemini configured" if api_key else "Gemini not configured")
     model = st.text_input("Gemini model", value=os.environ.get("GEMINI_MODEL", "gemini-2.5-flash"))
     st.divider()
     st.caption("Offline metrics are transparent lexical proxies, not LLM or RAGAS grades.")
@@ -49,8 +50,8 @@ except (ValueError, UnicodeDecodeError, OSError) as exc:
 
 st.write(f"Loaded **{len(docs)} documents** and **{len(cases)} evaluation questions**.")
 with st.expander("Preview data"):
-    st.dataframe(pd.DataFrame(docs), use_container_width=True)
-    st.dataframe(pd.DataFrame(cases), use_container_width=True)
+    st.dataframe(pd.DataFrame(docs), width="stretch")
+    st.dataframe(pd.DataFrame(cases), width="stretch")
 
 if st.button("Run evaluation", type="primary"):
     try:
@@ -77,7 +78,7 @@ if "results" in st.session_state:
     chart = pd.DataFrame(rows).set_index("question")[["hit_at_k", "recall_at_k", "answer_token_f1", "lexical_grounding_proxy"]]
     st.bar_chart(chart)
     visible = [{k: v for k, v in row.items() if k != "retrieved_contexts"} for row in rows]
-    st.dataframe(pd.DataFrame(visible), use_container_width=True)
+    st.dataframe(pd.DataFrame(visible), width="stretch")
     st.download_button("Download CSV report", data=pd.DataFrame(visible).to_csv(index=False), file_name="rag_evaluation_report.csv", mime="text/csv")
 
     with st.expander("Optional: run real RAGAS LLM judging on up to 3 cases"):
@@ -88,7 +89,7 @@ if "results" in st.session_state:
                 from rag_eval.ragas_judge import judge
                 with st.spinner("Calling Gemini for RAGAS judging..."):
                     judged = judge(rows, api_key, model, int(limit))
-                st.dataframe(pd.DataFrame(judged), use_container_width=True)
+                st.dataframe(pd.DataFrame(judged), width="stretch")
                 st.download_button("Download RAGAS CSV", pd.DataFrame(judged).to_csv(index=False), "ragas_scores.csv", "text/csv")
             except Exception as exc:
                 st.error(f"RAGAS failed: {exc}")
