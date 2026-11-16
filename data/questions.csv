@@ -1,0 +1,9 @@
+question,reference_answer,relevant_doc_ids
+What is the product return window?,Unused products can be returned within 30 days of purchase.,refunds
+How long does standard shipping take?,Standard shipping takes three to five business days.,shipping
+How is customer data protected?,Data is encrypted using TLS in transit and AES-256 at rest.,security
+When can I contact support?,Support is available Monday through Friday from 9 AM to 6 PM Eastern time.,support
+How long is the free trial?,New customers receive a 14-day free trial.,trial
+When does my subscription renew?,Subscriptions renew monthly.,billing
+How can I request deletion of my data?,Request deletion through the privacy portal.,privacy
+How often are disaster recovery tests run?,Disaster recovery tests run each quarter.,backup

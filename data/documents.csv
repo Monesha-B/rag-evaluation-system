@@ -1,0 +1,9 @@
+doc_id,text
+refunds,"Customers may return unused products within 30 days of purchase. Refunds are processed within five business days after approval."
+shipping,"Standard shipping takes three to five business days. Express shipping takes one to two business days."
+security,"The company encrypts customer data in transit using TLS and at rest using AES-256."
+support,"Customer support is available Monday through Friday from 9 AM to 6 PM Eastern time."
+trial,"New customers receive a 14-day free trial. A payment method is required to start a paid plan after the trial."
+billing,"Subscriptions renew monthly. Customers can cancel before the next billing date to prevent a new charge."
+privacy,"Account owners can request deletion of personal information through the privacy portal."
+backup,"Encrypted daily backups are retained for 30 days. Disaster recovery tests run each quarter."
